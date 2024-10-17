@@ -12,15 +12,13 @@ import net.mcbrawls.inject.InjectorContext
  */
 @Sharable
 abstract class HttpInjector : Injector() {
-    abstract fun isRelevant(ctx: InjectorContext, request: HttpRequest): Boolean
-
     abstract fun intercept(ctx: ChannelHandlerContext, request: HttpRequest): HttpByteBuf
 
     final override fun isRelevant(ctx: InjectorContext): Boolean {
         val buf = ctx.message
         val byte1 = buf.getUnsignedByte(buf.readerIndex()).toInt()
         val byte2 = buf.getUnsignedByte(buf.readerIndex() + 1).toInt()
-        return isHttp(byte1, byte2) && isRelevant(ctx, HttpRequest.parse(buf))
+        return isHttp(byte1, byte2)
     }
 
     final override fun onRead(ctx: ChannelHandlerContext, buf: ByteBuf): Boolean {
