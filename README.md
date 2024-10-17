@@ -2,7 +2,10 @@
 Inject is a simple server-side mod to allow developers to inject into
 Netty easier.
 
-HTTP example:
+## Example
+This uses the `HttpInjector` class to respond to HTTP requests to the Minecraft
+server.
+
 ```kt
 object MyEpicHttpInjector : HttpInjector() {
     override fun isRelevant(ctx: InjectorContext, request: HttpRequest) = true
