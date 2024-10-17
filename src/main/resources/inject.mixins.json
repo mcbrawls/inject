@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.mcbrawls.inject.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ClientConnectionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
