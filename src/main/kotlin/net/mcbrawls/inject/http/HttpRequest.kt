@@ -40,13 +40,13 @@ data class HttpRequest(val request: String, val headers: Map<String, String>) {
         /**
          * Parses an HTTP request from a [ByteBuf].
          */
-        fun parse(buf: ByteBuf) = with(ByteBufInputStream(buf)) { parse(this) }
+        fun parse(buf: ByteBuf) = ByteBufInputStream(buf).use(::parse)
 
-        private fun parse(stream: InputStream) = with(InputStreamReader(stream)) {
-            val reader = BufferedReader(this)
-            val request = reader.readLine()
-            val headers = readHeaders(reader)
-            reader.close()
+        private fun parse(stream: InputStream) = InputStreamReader(stream).use { reader ->
+            val bufferedReader = BufferedReader(reader)
+            val request = bufferedReader.readLine()
+            val headers = readHeaders(bufferedReader)
+            bufferedReader.close()
 
             HttpRequest(request, headers)
         }
