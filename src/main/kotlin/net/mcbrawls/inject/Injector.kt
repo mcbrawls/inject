@@ -28,6 +28,12 @@ abstract class Injector : ChannelDuplexHandler() {
 
     override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
         val buf = msg as ByteBuf
+        val context = InjectorContext(ctx.pipeline(), buf)
+        if (!isRelevant(context)) {
+            super.channelRead(ctx, msg)
+            return
+        }
+
         val shouldDelegate = !onRead(ctx, buf)
 
         if (shouldDelegate) super.channelRead(ctx, msg)
