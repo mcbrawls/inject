@@ -6,12 +6,16 @@ import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import net.mcbrawls.inject.Injector
 import net.mcbrawls.inject.InjectorContext
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * An [Injector] for HTTP requests.
  */
 @Sharable
 abstract class HttpInjector : Injector() {
+    private val logger: Logger = LoggerFactory.getLogger("HttpInjector ${hashCode()}")
+
     abstract fun intercept(ctx: ChannelHandlerContext, request: HttpRequest): HttpByteBuf
 
     override fun isRelevant(ctx: InjectorContext): Boolean {
@@ -21,7 +25,17 @@ abstract class HttpInjector : Injector() {
     final override fun onRead(ctx: ChannelHandlerContext, buf: ByteBuf): Boolean {
         val request = HttpRequest.parse(buf)
         val response = intercept(ctx, request)
-        ctx.writeAndFlush(response.inner).addListener(ChannelFutureListener.CLOSE)
+
+        ctx.writeAndFlush(response.inner)
+            .addListener(ChannelFutureListener.CLOSE)
+            .addListener { future ->
+                if (future.isSuccess) {
+                    logger.debug("Write successful")
+                } else {
+                    logger.error("Write failed: ${future.cause()}")
+                }
+            }
+
         return true
     }
 
