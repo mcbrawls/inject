@@ -29,10 +29,12 @@ abstract class HttpInjector : Injector() {
         ctx.writeAndFlush(response.inner)
             .addListener(ChannelFutureListener.CLOSE)
             .addListener { future ->
-                if (future.isSuccess) {
+                val cause = future.cause()
+                if (cause == null) {
                     logger.debug("Write successful")
                 } else {
-                    logger.error("Write failed: ${future.cause()}")
+                    logger.error("Write failed: $cause")
+                    cause.printStackTrace()
                 }
             }
 
