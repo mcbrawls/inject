@@ -1,6 +1,5 @@
 # inject
-Inject is a simple server-side mod to allow developers to inject into
-Netty easier.
+Inject is a simple server-side library to allow developers to inject into Netty easier.
 
 ## Example
 This uses the `HttpInjector` class to respond to HTTP requests to the Minecraft
