@@ -6,6 +6,7 @@ package net.mcbrawls.inject.api;
 public interface InjectPlatform {
     /**
      * Registers the injector.
+     *
      * @param injector The injector.
      */
     void registerInjector(Injector injector);

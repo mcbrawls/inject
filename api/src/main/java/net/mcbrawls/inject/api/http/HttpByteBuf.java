@@ -2,6 +2,7 @@ package net.mcbrawls.inject.api.http;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -54,6 +55,7 @@ public class HttpByteBuf {
 
     /**
      * Creates a new {@link HttpByteBuf} based off a {@link ChannelHandlerContext}'s allocator.
+     *
      * @param ctx the context
      * @return the HTTP byte buf
      */

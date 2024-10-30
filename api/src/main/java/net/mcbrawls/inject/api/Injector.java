@@ -12,11 +12,11 @@ import io.netty.channel.ChannelPromise;
 @Sharable
 public abstract class Injector extends ChannelDuplexHandler {
     /**
-     * Predicate for matching if this injector is relevant
-     * to the given context.
-     * @param ctx The context.
-     * @param direction The direction in which this packet goes.
-     * @return true if it's relevant and should be handled by this injector, false if not.
+     * Predicate for matching if this injector is relevant to the given context.
+     *
+     * @param ctx       the context.
+     * @param direction the direction in which this packet goes.
+     * @return true if it is relevant and should be handled by this injector, false if not.
      */
     public boolean isRelevant(InjectorContext ctx, PacketDirection direction) {
         return false;
@@ -24,6 +24,7 @@ public abstract class Injector extends ChannelDuplexHandler {
 
     /**
      * Gets executed on every channel read.
+     *
      * @param ctx The context.
      * @param buf The read byte buffer.
      * @return true if the channel read was handled and should not get
@@ -35,8 +36,9 @@ public abstract class Injector extends ChannelDuplexHandler {
 
     /**
      * Gets executed on every channel write.
-     * @param ctx The context.
-     * @param buf The written byte buffer.
+     *
+     * @param ctx     The context.
+     * @param buf     The written byte buffer.
      * @param promise The mutable channel future.
      * @return true if the channel write was handled and should not get
      * delegated to the superclass, false if it should be delegated to the superclass.

@@ -5,11 +5,13 @@ import net.mcbrawls.inject.fabric.InjectFabric;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.NetworkSide;
 import net.minecraft.network.handler.PacketSizeLogger;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@Debug(export = true)
 @Mixin(ClientConnection.class)
 public class ClientConnectionMixin {
     @Inject(method = "addHandlers", at = @At("TAIL"))

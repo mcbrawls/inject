@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -36,13 +37,13 @@ public class HttpRequest {
         return headers.get(header);
     }
 
-    public static HttpRequest parse(ByteBuf buf) throws Exception {
+    public static HttpRequest parse(ByteBuf buf) throws IOException {
         try (ByteBufInputStream stream = new ByteBufInputStream(buf)) {
             return parse(stream);
         }
     }
 
-    private static HttpRequest parse(InputStream stream) throws Exception {
+    private static HttpRequest parse(InputStream stream) throws IOException {
         try (InputStreamReader reader = new InputStreamReader(stream);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
             String request = bufferedReader.readLine();
@@ -51,7 +52,7 @@ public class HttpRequest {
         }
     }
 
-    private static Map<String, String> readHeaders(BufferedReader reader) throws Exception {
+    private static Map<String, String> readHeaders(BufferedReader reader) throws IOException {
         Map<String, String> headers = new HashMap<>();
         String header = reader.readLine();
         while (header != null && !header.isEmpty()) {
