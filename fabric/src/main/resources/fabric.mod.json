@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "inject",
+	"version": "${version}",
+	"name": "inject",
+	"description": "A library for making injecting into Netty easier!",
+	"authors": [
+		"radstevee",
+		"andantet"
+	],
+	"contact": {
+		"sources": "https://github.com/mcbrawls/inject"
+	},
+	"license": "MIT",
+	"icon": "assets/inject/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["net.mcbrawls.inject.fabric.InjectFabric"]
+	},
+	"mixins": [
+		"inject.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.7",
+		"minecraft": "~1.21.1",
+		"java": ">=21"
+	}
+}

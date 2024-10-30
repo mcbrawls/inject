@@ -6,18 +6,40 @@ Netty easier.
 This uses the `HttpInjector` class to respond to HTTP requests to the Minecraft
 server.
 
-```kt
-object MyEpicHttpInjector : HttpInjector() {
-    override fun isRelevant(ctx: InjectorContext, request: HttpRequest) = true
-    override fun intercept(ctx: ChannelHandlerContext, request: HttpRequest) = ctx.buildHttpBuffer {
-        writeStatusLine("1.1", 200, "OK")
-        writeText("Hello, from Minecraft!")
+```java
+class MyEpicHttpInjector extends HttpInjector {
+    @Override
+    public boolean isRelevant(InjectorContext ctx, HttpRequest request) {
+        return true;
+    }
+    
+    @Override
+    public HttpByteBuf intercept(ChannelHandlerContext ctx, HttpRequest request) {
+        HttpByteBuf buf = HttpByteBuf.httpBuf(ctx);
+        buf.writeStatusLine("1.1", 200, "OK");
+        buf.writeText("Hello, from Minecraft!");
+        return buf;
     }
 }
+```
 
-object MyMod : DedicatedServerModInitializer {
-    override fun onInitializeServer() {
-        MyEpicHttpInjector.register()
+## Registration
+For Fabric, use the `InjectFabric` class:
+```java
+public class MyMod implements ModInitializer {
+    @Override
+    public void onInitialize() {
+        InjectFabric.INSTANCE.registerInjector(new MyEpicHttpInjector());
+    }
+}
+```
+
+For Paper, use the `InjectPaper` class:
+```java
+public class MyPlugin extends JavaPlugin {
+    @Override
+    public void onEnable() {
+        InjectPaper.INSTANCE.registerInjector(new MyEpicHttpInjector());
     }
 }
 ```
@@ -32,19 +54,20 @@ Hello, from Minecraft!
 
 ## Usage
 Add the andante repo to gradle:
-```groovy
+```kt
 repositories {
-    maven {
-        name = "Andante"
-        url  = "https://maven.andante.dev/releases/"
-    }
+    maven("https://maven.andante.dev/releases/")
 }
 ```
 
 Add the dependency:
-```groovy
+```kt
 dependencies {
-    include modImplementation("net.mcbrawls:inject:VERSION")
+    // Fabric:
+    include(modImplementation("net.mcbrawls.inject:fabric:VERSION")!!)
+    
+    // Paper:
+    implementation("net.mcbrawls.inject:paper:VERSION")
 }
 ```
 
