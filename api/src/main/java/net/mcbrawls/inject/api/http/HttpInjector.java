@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
 public abstract class HttpInjector extends Injector {
     private final Logger logger = LoggerFactory.getLogger("HttpInjector " + hashCode());
 
-    public abstract boolean isRelevant(InjectorContext ctx, HttpRequest request);
-
     public abstract HttpByteBuf intercept(ChannelHandlerContext ctx, HttpRequest request);
 
     @Override
