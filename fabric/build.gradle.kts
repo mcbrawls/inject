@@ -58,6 +58,20 @@ publishing {
         create<MavenPublication>("mavenJava") {
             artifactId = project.name
             from(components["java"])
+
+            pom {
+                name = "Inject (Fabric)"
+                description = "A library for making injecting into Netty easier."
+                url = "https://mcbrawls.net"
+
+                licenses {
+                    license {
+                        name = "MIT"
+                        url = "https://opensource.org/licenses/MIT"
+                        distribution = "repo"
+                    }
+                }
+            }
         }
     }
 
