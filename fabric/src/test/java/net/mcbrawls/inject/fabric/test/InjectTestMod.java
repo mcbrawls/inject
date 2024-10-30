@@ -12,11 +12,6 @@ import net.mcbrawls.inject.fabric.InjectFabric;
 public class InjectTestMod implements DedicatedServerModInitializer {
     static class MyEpicHttpInjector extends HttpInjector {
         @Override
-        public boolean isRelevant(InjectorContext ctx, HttpRequest request) {
-            return true;
-        }
-
-        @Override
         public HttpByteBuf intercept(ChannelHandlerContext ctx, HttpRequest request) {
             HttpByteBuf buf = HttpByteBuf.httpBuf(ctx);
             buf.writeStatusLine("1.1", 200, "OK");
