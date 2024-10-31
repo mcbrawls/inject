@@ -38,6 +38,16 @@ public class MyPlugin extends JavaPlugin {
 }
 ```
 
+For Spigot, use the `InjectSpigot` class:
+```java
+public class MyPlugin extends JavaPlugin {
+    @Override
+    public void onEnable() {
+        InjectSpigot.INSTANCE.registerInjector(new MyEpicHttpInjector());
+    }
+}
+```
+
 This will register an HTTP injector which will respond with `Hello, from Minecraft!`
 to any HTTP request to the Minecraft port.
 
@@ -61,9 +71,12 @@ dependencies {
 
     // Fabric:
     include(modImplementation("net.mcbrawls.inject:fabric:VERSION")!!)
-    
+ 
     // Paper:
     implementation("net.mcbrawls.inject:paper:VERSION")
+
+    // Spigot:
+    implementation("net.mcbrawls.inject:spigot:VERSION")
 }
 ```
 
