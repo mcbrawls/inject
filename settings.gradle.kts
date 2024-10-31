@@ -13,4 +13,5 @@ plugins {
 
 include(":api")
 include(":fabric")
-include("paper")
+include(":paper")
+include(":spigot")
