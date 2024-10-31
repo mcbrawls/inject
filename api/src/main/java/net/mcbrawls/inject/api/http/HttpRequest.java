@@ -38,6 +38,7 @@ public class HttpRequest {
     }
 
     public static HttpRequest parse(ByteBuf buf) throws IOException {
+        buf.resetReaderIndex();
         try (ByteBufInputStream stream = new ByteBufInputStream(buf)) {
             return parse(stream);
         }
