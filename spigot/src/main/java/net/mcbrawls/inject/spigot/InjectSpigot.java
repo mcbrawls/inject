@@ -17,11 +17,25 @@ public class InjectSpigot implements InjectPlatform {
     private InjectSpigot() {
     }
 
+    private boolean isRunningPaper() {
+        try {
+            Class.forName("com.destroystokyo.paper.PaperConfig");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
     @Override
     public void registerInjector(Injector injector) {
         injectors.add(injector);
 
         if (!hasInitialized) {
+            if (isRunningPaper()) {
+                LOGGER.warning("It looks like you are running Paper - Inject Spigot is unsupported on Paper!");
+                LOGGER.warning("Please use Inject Paper instead!");
+            }
+
             new ClientConnectionInterceptor().install((channel) -> {
                 var pipeline = channel.pipeline();
                 injectors.forEach(pipeline::addFirst);

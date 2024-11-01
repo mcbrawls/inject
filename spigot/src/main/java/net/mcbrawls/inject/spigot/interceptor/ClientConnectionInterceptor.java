@@ -6,8 +6,11 @@ import org.bukkit.Bukkit;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class ClientConnectionInterceptor {
 
@@ -44,6 +47,22 @@ public class ClientConnectionInterceptor {
         }
     }
 
+    private Method getMethodByReturnType(Class<?> clazz, Class<?> returnType) {
+        return Arrays.stream(clazz.getDeclaredMethods())
+                .filter((method) -> method.getReturnType().equals(returnType))
+                .findFirst()
+                .get();
+    }
+
+    // Predicate is needed to make sure we find the `List<ChannelFuture> channels` instead of `List<Connection> connections`
+    // since `channels` is private.
+    private Field getFieldByTypeAndPredicate(Class<?> clazz, Class<?> type, Function<Field, Boolean> predicate) {
+        return Arrays.stream(clazz.getDeclaredFields())
+                .filter((field) -> field.getType().equals(type) && predicate.apply(field))
+                .findFirst()
+                .get();
+    }
+
     private List<ChannelFuture> getChannels() {
         final String serverVersion = this.getServerVersion();
 
@@ -55,15 +74,14 @@ public class ClientConnectionInterceptor {
             final Method craftServerGetServerMethod = craftServerClass.getDeclaredMethod("getServer");
 
             final Object minecraftServer = craftServerGetServerMethod.invoke(craftServerObject);
-            final Method getConnectionMethod = minecraftServerClass.getDeclaredMethod("ai");
+            final Method getConnectionMethod = getMethodByReturnType(minecraftServerClass, Class.forName("net.minecraft.server.network.ServerConnection"));
 
             final Object serverConnection = getConnectionMethod.invoke(minecraftServer);
-            final Field channelsField = serverConnection.getClass().getDeclaredField("f");
+            final Field channelsField = getFieldByTypeAndPredicate(serverConnection.getClass(), List.class, (field) -> Modifier.isPrivate(field.getModifiers()));
 
             channelsField.setAccessible(true);
             return (List<ChannelFuture>) channelsField.get(serverConnection);
-        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException |
-                 NoSuchFieldException e) {
+        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
