@@ -48,6 +48,11 @@ public class MyPlugin extends JavaPlugin {
 }
 ```
 
+> [!CAUTION]
+> The Spigot module does not function on Paper. Please use the Paper module and check what the server
+> is running on, and decide based on that. The Spigot module uses reflection into internals which are
+> renamed on Paper due to mojang mappings at runtime.
+
 This will register an HTTP injector which will respond with `Hello, from Minecraft!`
 to any HTTP request to the Minecraft port.
 
