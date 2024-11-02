@@ -72,7 +72,7 @@ repositories {
 Add the dependency:
 ```kt
 dependencies {
-    implementation("net.mcbrwals.inject:api:VERSION")
+    implementation("net.mcbrawls.inject:api:VERSION")
 
     // Fabric:
     include(modImplementation("net.mcbrawls.inject:fabric:VERSION")!!)
