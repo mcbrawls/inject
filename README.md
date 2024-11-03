@@ -73,6 +73,9 @@ Add the dependency:
 ```kt
 dependencies {
     implementation("net.mcbrawls.inject:api:VERSION")
+    
+    // HTTP-related things:
+    implementation("net.mcbrawls.inject:http:VERSION")
 
     // Fabric:
     include(modImplementation("net.mcbrawls.inject:fabric:VERSION")!!)
