@@ -35,10 +35,13 @@ dependencies {
     val version = prop("minecraft_version") + "-R0.1-SNAPSHOT"
 
     implementation(project(":api"))
+    implementation(project(":http"))
+
     paperweight.paperDevBundle(version)
 
     exampleCompileOnly("io.papermc.paper:paper-api:$version")
     exampleImplementation(project(":api"))
+    exampleImplementation(project(":http"))
 }
 
 tasks {
@@ -47,6 +50,7 @@ tasks {
         from(sourceSets["main"].output)
         from(sourceSets["example"].output)
         from(project(":api").sourceSets.main.get().output) // Cursed. But it works (I spent 2 hours on this)
+        from(project(":http").sourceSets.main.get().output)
 
         group = "build"
     }

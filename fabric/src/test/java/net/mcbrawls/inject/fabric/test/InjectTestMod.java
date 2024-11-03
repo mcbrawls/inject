@@ -2,11 +2,9 @@ package net.mcbrawls.inject.fabric.test;
 
 import io.netty.channel.ChannelHandlerContext;
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.fabricmc.api.ModInitializer;
-import net.mcbrawls.inject.api.InjectorContext;
-import net.mcbrawls.inject.api.http.HttpByteBuf;
-import net.mcbrawls.inject.api.http.HttpInjector;
-import net.mcbrawls.inject.api.http.HttpRequest;
+import net.mcbrawls.inject.http.HttpByteBuf;
+import net.mcbrawls.inject.http.HttpInjector;
+import net.mcbrawls.inject.http.HttpRequest;
 import net.mcbrawls.inject.fabric.InjectFabric;
 
 public class InjectTestMod implements DedicatedServerModInitializer {

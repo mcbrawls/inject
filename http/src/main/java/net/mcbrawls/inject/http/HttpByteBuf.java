@@ -1,4 +1,4 @@
-package net.mcbrawls.inject.api.http;
+package net.mcbrawls.inject.http;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

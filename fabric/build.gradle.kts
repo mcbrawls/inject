@@ -19,6 +19,7 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${prop("loader_version")}")
 
     implementation(project(":api"))
+    testImplementation(project(":http"))
 }
 
 tasks.processResources {

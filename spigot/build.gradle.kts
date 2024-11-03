@@ -49,6 +49,7 @@ tasks {
         from(sourceSets["main"].output)
         from(sourceSets["example"].output) // Include the example source set
         from(project(":api").sourceSets.main.get().output) // Cursed. But it works (I spent 2 hours on this)
+        from(project(":http").sourceSets.main.get().output)
 
         configurations = listOf(exampleImplementation) // Include example dependencies
         mergeServiceFiles() // Optional: If you need to merge service files
