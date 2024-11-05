@@ -3,12 +3,13 @@ package net.mcbrawls.inject.spigot;
 import net.mcbrawls.inject.api.InjectPlatform;
 import net.mcbrawls.inject.api.Injector;
 import net.mcbrawls.inject.spigot.interceptor.ClientConnectionInterceptor;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class InjectSpigot implements InjectPlatform {
+public class InjectSpigot extends JavaPlugin implements InjectPlatform {
     private static final Logger LOGGER = Logger.getLogger("inject");
     public static InjectSpigot INSTANCE = new InjectSpigot();
     private static final List<Injector> injectors = new ArrayList<>();

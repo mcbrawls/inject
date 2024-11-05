@@ -1,0 +1,3 @@
+name: Inject
+main: net.mcbrawls.inject.spigot.InjectSpigot
+version: ${version}
