@@ -7,6 +7,8 @@ plugins {
 
 fun prop(name: String) = project.rootProject.property(name) as String
 
+val isPublishing = gradle.startParameter.taskNames.any { it.contains("publish") }
+
 group = prop("group")
 version = prop("version")
 
@@ -68,6 +70,18 @@ tasks {
 
     runDevBundleServer {
         pluginJars(jarExample.archiveFile)
+    }
+}
+
+tasks.processResources {
+    inputs.property("version", project.version)
+
+    filesMatching("plugin.yml") {
+        if (isPublishing) {
+            exclude()
+        } else {
+            expand("version" to project.version)
+        }
     }
 }
 

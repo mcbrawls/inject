@@ -4,13 +4,14 @@ import io.papermc.paper.network.ChannelInitializeListenerHolder;
 import net.kyori.adventure.key.Key;
 import net.mcbrawls.inject.api.InjectPlatform;
 import net.mcbrawls.inject.api.Injector;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InjectPaper implements InjectPlatform {
+public class InjectPaper extends JavaPlugin implements InjectPlatform {
     private static final Logger LOGGER = LoggerFactory.getLogger("inject");
     public static InjectPaper INSTANCE = new InjectPaper();
     private static final List<Injector> injectors = new ArrayList<>();
