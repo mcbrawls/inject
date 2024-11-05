@@ -10,7 +10,7 @@ version = prop("version")
 group = prop("group")
 
 base {
-    archivesName.set(project.name)
+    archivesName.set("${rootProject.name}-${project.name}")
 }
 
 dependencies {
