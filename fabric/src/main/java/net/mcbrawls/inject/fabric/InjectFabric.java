@@ -11,13 +11,11 @@ import java.util.List;
 
 public class InjectFabric implements ModInitializer, InjectPlatform {
     private static final Logger LOGGER = LoggerFactory.getLogger("inject");
-    public static InjectFabric INSTANCE;
+    public static final InjectFabric INSTANCE = new InjectFabric();
     public final List<Injector> injectors = new ArrayList<>();
 
     @Override
     public void onInitialize() {
-        INSTANCE = this;
-
         LOGGER.info("Inject initialising");
     }
 
