@@ -1,0 +1,4 @@
+name: "inject-spigot-example"
+version: "0.0"
+main: net.mcbrawls.inject.examples.spigot.InjectSpigotExample
+api-version: "1.21"

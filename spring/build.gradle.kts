@@ -1,13 +1,9 @@
 plugins {
     java
     `maven-publish`
-    id("io.papermc.paperweight.userdev")
-    id("xyz.jpenilla.run-paper")
 }
 
 fun prop(name: String) = project.rootProject.property(name) as String
-
-val isPublishing = gradle.startParameter.taskNames.any { it.contains("publish") }
 
 group = prop("group")
 version = prop("version")
@@ -18,28 +14,27 @@ base {
 
 repositories {
     mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
-    val version = prop("minecraft_version") + "-R0.1-SNAPSHOT"
-
     implementation(project(":api"))
-    implementation(project(":http"))
+    implementation(project(":jetty")) {
+        isTransitive = false
+    }
 
-    paperweight.paperDevBundle(version)
-}
-
-tasks.processResources {
-    inputs.property("version", project.version)
-
-    filesMatching("plugin.yml") {
-        if (isPublishing) {
-            exclude()
-        } else {
-            expand("version" to project.version)
+    compileOnly("org.springframework.boot:spring-boot-starter-web:3.3.5") {
+        modules {
+            exclude("org.springframework.boot", "spring-boot-starter-logging")
+            module("org.springframework.boot:spring-boot-starter-tomcat") {
+                replacedBy("org.springframework.boot:spring-boot-starter-jetty", "Use Jetty instead of Tomcat")
+            }
         }
     }
+
+    compileOnly("org.springframework.boot:spring-boot-starter-jetty:3.3.5")
+
+    compileOnly("io.netty:netty-all:4.1.97.Final")
+    compileOnly("org.slf4j:slf4j-api:1.7.30")
 }
 
 publishing {
@@ -49,7 +44,7 @@ publishing {
             from(components["java"])
 
             pom {
-                name = "Inject (Paper)"
+                name = "Inject (Spring Boot)"
                 description = "A library for making injecting into Netty easier."
                 url = "https://mcbrawls.net"
 

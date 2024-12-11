@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "inject-test",
+  "version": "1.0",
+
+  "name": "inject-test",
+
+  "environment": "server",
+  "entrypoints": {
+    "server": [
+      "net.mcbrawls.inject.examples.fabric.InjectFabricExample"
+    ]
+  }
+}

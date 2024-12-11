@@ -1,13 +1,9 @@
 plugins {
     java
     `maven-publish`
-    id("io.papermc.paperweight.userdev")
-    id("xyz.jpenilla.run-paper")
 }
 
 fun prop(name: String) = project.rootProject.property(name) as String
-
-val isPublishing = gradle.startParameter.taskNames.any { it.contains("publish") }
 
 group = prop("group")
 version = prop("version")
@@ -18,28 +14,15 @@ base {
 
 repositories {
     mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
-    val version = prop("minecraft_version") + "-R0.1-SNAPSHOT"
-
     implementation(project(":api"))
-    implementation(project(":http"))
-
-    paperweight.paperDevBundle(version)
-}
-
-tasks.processResources {
-    inputs.property("version", project.version)
-
-    filesMatching("plugin.yml") {
-        if (isPublishing) {
-            exclude()
-        } else {
-            expand("version" to project.version)
-        }
+    implementation(project(":jetty")) {
+        isTransitive = false
     }
+
+    implementation("io.javalin:javalin:6.3.0")
 }
 
 publishing {
@@ -49,7 +32,7 @@ publishing {
             from(components["java"])
 
             pom {
-                name = "Inject (Paper)"
+                name = "Inject (Javalin)"
                 description = "A library for making injecting into Netty easier."
                 url = "https://mcbrawls.net"
 

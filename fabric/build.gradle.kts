@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom") version "1.8-SNAPSHOT"
+    id("fabric-loom") version "1.9-SNAPSHOT"
     id("maven-publish")
     java
 }
@@ -19,7 +19,6 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${prop("loader_version")}")
 
     implementation(project(":api"))
-    testImplementation(project(":http"))
 }
 
 tasks.processResources {
@@ -39,19 +38,6 @@ java {
 
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
-}
-
-loom {
-    splitEnvironmentSourceSets()
-
-    runs {
-        create("test") {
-            inherit(runs["server"])
-            name("Minecraft Server (Test)")
-            source(sourceSets.test.get())
-            ideConfigGenerated(true)
-        }
-    }
 }
 
 publishing {

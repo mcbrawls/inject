@@ -1,0 +1,4 @@
+name: "inject-paper-example"
+version: "0.0"
+main: net.mcbrawls.inject.examples.paper.InjectPaperExample
+api-version: "1.21.4"
