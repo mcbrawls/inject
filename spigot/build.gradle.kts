@@ -5,6 +5,12 @@ plugins {
     id("xyz.jpenilla.run-paper")
 }
 
+base {
+    archivesName.set("${rootProject.name}-${project.name}")
+}
+
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
+
 fun prop(name: String) = project.rootProject.property(name) as String
 
 repositories {
@@ -19,6 +25,10 @@ dependencies {
     implementation(project(":http"))
 
     paperweight.paperDevBundle(version)
+}
+
+tasks.assemble {
+    dependsOn(tasks.reobfJar)
 }
 
 publishing {
