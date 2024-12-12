@@ -46,7 +46,14 @@ $ curl http://localhost:25565
 Hello, from Minecraft!
 ```
 
-Further examples like Spring and Javalin can be found in the `examples` module.
+## Supported web servers
+- Spring Boot: `spring` module
+- Javalin: `javalin` module
+- Ktor: `ktor` module
+- Jetty: `jetty` module
+- manual request handling: `http` module
+
+Examples can be found in the `examples` module.
 
 ## Usage
 Add the andante repo to gradle:
