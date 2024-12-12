@@ -11,9 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 @Sharable
 public abstract class HttpInjector extends Injector {
+    private static final List<String> REQUEST_METHODS = List.of("GET ", "POST ", "PUT ", "DELETE ", "PATCH ");
+
     private final Logger logger = LoggerFactory.getLogger("HttpInjector " + hashCode());
 
     public abstract HttpByteBuf intercept(ChannelHandlerContext ctx, HttpRequest request);
@@ -32,11 +35,14 @@ public abstract class HttpInjector extends Injector {
 
     @Override
     public final boolean isRelevant(InjectorContext ctx, PacketDirection direction) {
-        if (!isRequestGet(ctx.message())) return false;
+        ByteBuf byteBuf = ctx.message();
+        if (!isHttp(byteBuf)) {
+            return false;
+        }
 
         HttpRequest request;
         try {
-            request = HttpRequest.parse(ctx.message());
+            request = HttpRequest.parse(byteBuf);
         } catch (IOException exception) {
             logger.error("failed parsing HTTP request: {}", exception.getMessage());
             return false;
@@ -77,7 +83,13 @@ public abstract class HttpInjector extends Injector {
         return true;
     }
 
-    private boolean isRequestGet(ByteBuf buf) {
-        return isRequestMethod(buf, "GET ");
+    private boolean isHttp(ByteBuf buf) {
+        for (String methodType : REQUEST_METHODS) {
+            if (isRequestMethod(buf, methodType)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -34,6 +34,12 @@ publish_version() {
     return 1
   fi
 
+  if [[ "$loader" = "spigot" ]]; then
+    loaders='["spigot", "paper", "folia", "purpur"]'
+  else
+    loaders="[\"$loader\"]"
+  fi
+
   changelog=$(echo "$notes" | sed 's/"/\\"/g')
   game_versions='["1.21.1", "1.21.2", "1.21.3", "1.21.4"]'
 
@@ -45,7 +51,7 @@ publish_version() {
       "changelog": "$changelog",
       "game_versions": $game_versions,
       "version_type": "release",
-      "loaders": ["$loader"],
+      "loaders": $loaders,
       "status": "listed",
       "requested_status": "listed",
       "project_id": "Cd6cEGUq",
