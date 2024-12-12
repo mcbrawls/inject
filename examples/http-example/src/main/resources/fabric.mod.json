@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "inject-http-example",
+  "version": "0.0",
+
+  "name": "inject-http-example",
+
+  "environment": "server",
+  "entrypoints": {
+    "server": [
+      "net.mcbrawls.inject.examples.http.InjectHttpExample"
+    ]
+  }
+}

@@ -28,17 +28,7 @@ public class MyMod implements ModInitializer {
 }
 ```
 
-For Paper, use the `InjectPaper` class:
-```java
-public class MyPlugin extends JavaPlugin {
-    @Override
-    public void onEnable() {
-        InjectPaper.INSTANCE.registerInjector(new MyEpicHttpInjector());
-    }
-}
-```
-
-For Spigot, use the `InjectSpigot` class:
+For Spigot, Paper and derivatives, use the `InjectSpigot` class:
 ```java
 public class MyPlugin extends JavaPlugin {
     @Override
@@ -48,11 +38,6 @@ public class MyPlugin extends JavaPlugin {
 }
 ```
 
-> [!CAUTION]
-> The Spigot module does not function on Paper. Please use the Paper module and check what the server
-> is running on, and decide based on that. The Spigot module uses reflection into internals which are
-> renamed on Paper due to mojang mappings at runtime.
-
 This will register an HTTP injector which will respond with `Hello, from Minecraft!`
 to any HTTP request to the Minecraft port.
 
@@ -60,6 +45,8 @@ to any HTTP request to the Minecraft port.
 $ curl http://localhost:25565
 Hello, from Minecraft!
 ```
+
+Further examples like Spring and Javalin can be found in the `examples` module.
 
 ## Usage
 Add the andante repo to gradle:
@@ -73,17 +60,14 @@ Add the dependency:
 ```kt
 dependencies {
     implementation("net.mcbrawls.inject:api:VERSION")
-    
+ 
     // HTTP-related things:
     implementation("net.mcbrawls.inject:http:VERSION")
 
     // Fabric:
     include(modImplementation("net.mcbrawls.inject:fabric:VERSION")!!)
  
-    // Paper:
-    implementation("net.mcbrawls.inject:paper:VERSION")
-
-    // Spigot:
+    // Spigot/Paper:
     implementation("net.mcbrawls.inject:spigot:VERSION")
 }
 ```

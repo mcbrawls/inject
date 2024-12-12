@@ -7,8 +7,8 @@ import net.mcbrawls.inject.http.HttpInjector;
 import net.mcbrawls.inject.http.HttpRequest;
 import net.mcbrawls.inject.fabric.InjectFabric;
 
-public class InjectFabricExample implements DedicatedServerModInitializer {
-    static class MyEpicHttpInjector extends HttpInjector {
+public class InjectHttpExample implements DedicatedServerModInitializer {
+    private static class MyEpicHttpInjector extends HttpInjector {
         @Override
         public HttpByteBuf intercept(ChannelHandlerContext ctx, HttpRequest request) {
             HttpByteBuf buf = HttpByteBuf.httpBuf(ctx);

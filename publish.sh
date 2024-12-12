@@ -14,7 +14,10 @@ note_file="/tmp/inject-release-notes.md"
 notes=$(cat "$note_file")
 
 for dir in *; do
-  [[ -f "$dir/build.gradle.kts" ]] && ./gradlew "$dir:publish"
+  # Only publish for modules that have the maven publishing plugin
+  if [[ -f "$dir/build.gradle.kts" ]] && grep -q "maven-publish" "$dir/build.gradle.kts"; then
+    ./gradlew "$dir:publish"
+  fi
 done
 
 gh release create "v$version" -F "$note_file"
@@ -24,11 +27,7 @@ publish_version() {
 
   api_file="api/build/libs/inject-api-$version.jar"
 
-  if [[ "$loader" == "paper" ]]; then
-    loader_file="paper/build/libs/inject-paper-$version-dev.jar"
-  else
-    loader_file="$loader/build/libs/inject-$loader-$version.jar"
-  fi
+  loader_file="$loader/build/libs/inject-$loader-$version.jar"
 
   if [[ ! -f "$api_file" || ! -f "$loader_file" ]]; then
     echo "One or more files not found: $api_file, $loader_file"
@@ -36,9 +35,10 @@ publish_version() {
   fi
 
   changelog=$(echo "$notes" | sed 's/"/\\"/g')
-  game_versions='["1.21.1", "1.21.2", "1.21.3"]'
+  game_versions='["1.21.1", "1.21.2", "1.21.3", "1.21.4"]'
 
-  version_data=$(cat <<EOF
+  version_data=$(
+    cat <<EOF
     {
       "name": "Inject $version",
       "version_number": "$version",
@@ -55,7 +55,7 @@ publish_version() {
       "featured": false
     }
 EOF
-)
+  )
 
   curl \
     -X POST \
@@ -70,6 +70,6 @@ EOF
 
 publish_version fabric
 publish_version spigot
-publish_version paper
 
 rm "$note_file"
+
