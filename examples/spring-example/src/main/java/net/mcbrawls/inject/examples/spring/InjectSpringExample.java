@@ -10,30 +10,30 @@ import java.util.Properties;
 import java.util.logging.Level;
 
 public class InjectSpringExample extends JavaPlugin {
-  private ConfigurableApplicationContext applicationContext;
+    private ConfigurableApplicationContext applicationContext;
 
-  private void initSpring() {
-    try {
-      Properties props = new Properties();
-      props.load(this.getResource("application.properties"));
-      applicationContext = InjectSpringApplicationLoader
-          .run(InjectSpringApplicationBuilder.create(InjectSpringApplication.class, props));
-    } catch (Exception exception) {
-      getLogger().log(Level.SEVERE, "Spring error, shutting down...");
-      exception.printStackTrace();
-      Bukkit.getPluginManager().disablePlugin(this);
+    private void initSpring() {
+        try {
+            Properties props = new Properties();
+            props.load(this.getResource("application.properties"));
+            applicationContext = InjectSpringApplicationLoader
+                .run(InjectSpringApplicationBuilder.create(InjectSpringApplication.class, props));
+        } catch (Exception exception) {
+            getLogger().log(Level.SEVERE, "Spring error, shutting down...");
+            exception.printStackTrace();
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
     }
-  }
 
-  @Override
-  public void onEnable() {
-    initSpring();
-  }
-
-  @Override
-  public void onDisable() {
-    if (applicationContext != null) {
-      applicationContext.close();
+    @Override
+    public void onEnable() {
+        initSpring();
     }
-  }
+
+    @Override
+    public void onDisable() {
+        if (applicationContext != null) {
+            applicationContext.close();
+        }
+    }
 }
