@@ -3,6 +3,7 @@ package net.mcbrawls.inject.spring;
 import org.springframework.boot.Banner;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.boot.WebApplicationType;
 
 import java.util.Properties;
 
@@ -14,6 +15,7 @@ public final class InjectSpringApplicationBuilder {
 
     public static SpringApplicationBuilder create(Class<?> applicationClass, Properties props) {
         return new SpringApplicationBuilder(applicationClass)
+                .web(WebApplicationType.SERVLET)
                 .resourceLoader(new DefaultResourceLoader(applicationClass.getClassLoader()))
                 .bannerMode(Banner.Mode.OFF)
                 .logStartupInfo(true)
