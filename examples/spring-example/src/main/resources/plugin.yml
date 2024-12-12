@@ -1,0 +1,8 @@
+name: "inject-spring-example"
+version: "0.0"
+main: net.mcbrawls.inject.examples.spring.InjectSpringExample
+api-version: "1.21.4"
+
+libraries:
+  - "org.springframework.boot:spring-boot-starter-web:3.3.5"
+  - "org.springframework.boot:spring-boot-starter-jetty:3.3.5"

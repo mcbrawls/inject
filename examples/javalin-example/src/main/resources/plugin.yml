@@ -1,0 +1,4 @@
+name: "inject-javalin-example"
+version: "0.0"
+main: net.mcbrawls.inject.examples.javalin.InjectJavalinExample
+api-version: "1.21"

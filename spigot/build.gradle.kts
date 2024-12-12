@@ -1,6 +1,8 @@
 plugins {
     java
     `maven-publish`
+    id("io.papermc.paperweight.userdev")
+    id("xyz.jpenilla.run-paper")
 }
 
 fun prop(name: String) = project.rootProject.property(name) as String
@@ -10,16 +12,16 @@ version = prop("version")
 
 repositories {
     mavenCentral()
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    maven("https://oss.sonatype.org/content/repositories/central")
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
-    implementation(project(":api"))
+    val version = prop("minecraft_version") + "-R0.1-SNAPSHOT"
 
-    compileOnly("org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT")
-    compileOnly("io.netty:netty-all:4.0.23.Final")
+    implementation(project(":api"))
+    implementation(project(":http"))
+
+    paperweight.paperDevBundle(version)
 }
 
 publishing {
@@ -29,11 +31,17 @@ publishing {
             from(components["java"])
 
             pom {
-                name = "Inject (Spigot)"
+                name = "Inject (Spigot/Paper)"
                 description = "A library for making injecting into Netty easier."
                 url = "https://mcbrawls.net"
 
                 licenses {
+                    license {
+                        name = "GPL-3.0"
+                        url = "https://opensource.org/license/gpl-3-0"
+                        distribution = "repo"
+                    }
+
                     license {
                         name = "MIT"
                         url = "https://opensource.org/licenses/MIT"
