@@ -4,12 +4,12 @@ plugins {
     kotlin("jvm") version "2.1.0" apply false
 }
 
-fun prop(name: String) = property("version") as String
+fun prop(name: String) = property(name) as String
 
 version = prop("version")
 group = prop("group")
 
 subprojects {
     version = prop("version")
-    group = prop("version")
+    group = prop("group")
 }
