@@ -6,9 +6,6 @@ plugins {
 
 fun prop(name: String) = project.rootProject.property(name) as String
 
-version = prop("version")
-group = prop("group")
-
 base {
     archivesName.set("${rootProject.name}-${project.name}")
 }

@@ -4,9 +4,6 @@ plugins {
 
 fun prop(name: String) = project.rootProject.property(name) as String
 
-version = prop("version")
-group = prop("group")
-
 dependencies {
     minecraft("com.mojang:minecraft:${prop("minecraft_version")}")
     mappings("net.fabricmc:yarn:${prop("yarn_mappings")}:v2")

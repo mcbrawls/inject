@@ -1,0 +1,4 @@
+name: "inject-ktor-example"
+version: "0.0"
+main: net.mcbrawls.inject.examples.ktor.InjectKtorExample
+api-version: "1.21"

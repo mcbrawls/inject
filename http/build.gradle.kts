@@ -3,11 +3,6 @@ plugins {
     `maven-publish`
 }
 
-fun prop(name: String) = project.rootProject.property(name) as String
-
-group = prop("group")
-version = prop("version")
-
 base {
     archivesName.set("${rootProject.name}-${project.name}")
 }
