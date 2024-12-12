@@ -20,8 +20,7 @@ import java.nio.ByteBuffer;
  * @author Olivoz
  */
 public class JettyInjector extends Injector {
-
-    private final Logger logger = LoggerFactory.getLogger("JavalinInjector " + this.hashCode());
+    private final Logger logger = LoggerFactory.getLogger("JettyInjector " + this.hashCode());
     private final LocalConnector connector;
 
     /**
