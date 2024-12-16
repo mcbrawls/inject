@@ -13,3 +13,9 @@ subprojects {
     version = prop("version")
     group = prop("group")
 }
+
+allprojects {
+    java {
+        withSourcesJar()
+    }
+}
