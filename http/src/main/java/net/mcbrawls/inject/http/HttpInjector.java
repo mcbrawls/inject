@@ -55,6 +55,9 @@ public abstract class HttpInjector extends Injector {
     public boolean onRead(ChannelHandlerContext ctx, ByteBuf buf) throws Exception {
         HttpRequest request = HttpRequest.parse(buf);
         HttpByteBuf response = intercept(ctx, request);
+        if (response == null) {
+            return false;
+        }
 
         ctx.writeAndFlush(response.inner())
                 .addListener(ChannelFutureListener.CLOSE)
