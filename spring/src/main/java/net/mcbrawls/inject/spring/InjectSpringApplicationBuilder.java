@@ -1,9 +1,9 @@
 package net.mcbrawls.inject.spring;
 
 import org.springframework.boot.Banner;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.boot.WebApplicationType;
 
 import java.util.Properties;
 

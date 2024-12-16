@@ -2,10 +2,10 @@ package net.mcbrawls.inject.examples.fabric;
 
 import io.netty.channel.ChannelHandlerContext;
 import net.fabricmc.api.DedicatedServerModInitializer;
+import net.mcbrawls.inject.fabric.InjectFabric;
 import net.mcbrawls.inject.http.HttpByteBuf;
 import net.mcbrawls.inject.http.HttpInjector;
 import net.mcbrawls.inject.http.HttpRequest;
-import net.mcbrawls.inject.fabric.InjectFabric;
 
 public class InjectHttpExample implements DedicatedServerModInitializer {
     private static class MyEpicHttpInjector extends HttpInjector {

@@ -1,13 +1,9 @@
 package net.mcbrawls.inject.examples.javalin;
 
-import io.netty.channel.ChannelHandlerContext;
-import net.mcbrawls.inject.http.HttpByteBuf;
-import net.mcbrawls.inject.http.HttpInjector;
-import net.mcbrawls.inject.http.HttpRequest;
-import net.mcbrawls.inject.spigot.InjectSpigot;
-import org.bukkit.plugin.java.JavaPlugin;
 import io.javalin.Javalin;
 import net.mcbrawls.inject.javalin.InjectJavalinFactory;
+import net.mcbrawls.inject.spigot.InjectSpigot;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class InjectJavalinExample extends JavaPlugin {
     private Javalin javalin;

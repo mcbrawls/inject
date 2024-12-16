@@ -1,10 +1,10 @@
 package net.mcbrawls.inject.spigot;
 
+import io.papermc.paper.network.ChannelInitializeListenerHolder;
 import net.kyori.adventure.key.Key;
 import net.mcbrawls.inject.api.InjectPlatform;
 import net.mcbrawls.inject.api.Injector;
 import net.mcbrawls.inject.spigot.interceptor.ClientConnectionInterceptor;
-import io.papermc.paper.network.ChannelInitializeListenerHolder;
 
 import java.util.ArrayList;
 import java.util.List;
