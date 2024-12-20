@@ -37,6 +37,14 @@ public class HttpRequest {
         return headers.get(header);
     }
 
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
+    public String getRequest() {
+        return request;
+    }
+
     public static HttpRequest parse(ByteBuf buf) throws IOException {
         buf.resetReaderIndex();
         try (ByteBufInputStream stream = new ByteBufInputStream(buf)) {

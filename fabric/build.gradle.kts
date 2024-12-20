@@ -6,6 +6,11 @@ plugins {
 
 fun prop(name: String) = project.rootProject.property(name) as String
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 base {
     archivesName.set("${rootProject.name}-${project.name}")
 }

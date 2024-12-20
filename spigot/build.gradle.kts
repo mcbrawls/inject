@@ -5,6 +5,11 @@ plugins {
     id("xyz.jpenilla.run-paper")
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 base {
     archivesName.set("${rootProject.name}-${project.name}")
 }

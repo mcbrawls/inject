@@ -3,6 +3,11 @@ plugins {
     `maven-publish`
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 base {
     archivesName.set("${rootProject.name}-${project.name}")
 }
