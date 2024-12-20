@@ -17,19 +17,11 @@ dependencies {
     compileOnly("io.ktor:ktor-server-jetty-jakarta:$ktorVersion")
 }
 
-tasks.register<Jar>("sourcesJar") {
-    from(sourceSets.main.get().allSource)
-    archiveClassifier.set("sources")
-}
-
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             artifactId = project.name
             from(components["java"])
-            artifact(tasks["sourcesJar"]) {
-                classifier = "sources"
-            }
 
             pom {
                 name = "Inject (Ktor)"
