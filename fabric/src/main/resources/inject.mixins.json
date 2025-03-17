@@ -3,7 +3,8 @@
   "package": "net.mcbrawls.inject.fabric.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ClientConnectionMixin"
+    "ClientConnectionMixin",
+    "InjectorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

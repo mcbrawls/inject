@@ -47,9 +47,22 @@ public abstract class Injector extends ChannelDuplexHandler {
         return false;
     }
 
+    // Exists for ease of mixing into
+    private ByteBuf extractByteBuf(Object msg) {
+        ByteBuf buf = null;
+        if (msg instanceof ByteBuf byteBuf) {
+            buf = byteBuf;
+        }
+        return buf;
+    }
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf buf = (ByteBuf) msg;
+        ByteBuf buf = extractByteBuf(msg);
+        if (buf == null) {
+            return;
+        }
+
         InjectorContext context = new InjectorContext(ctx.pipeline(), buf);
         if (!isRelevant(context, PacketDirection.INBOUND)) {
             super.channelRead(ctx, msg);
@@ -61,7 +74,11 @@ public abstract class Injector extends ChannelDuplexHandler {
 
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-        ByteBuf buf = (ByteBuf) msg;
+        ByteBuf buf = extractByteBuf(msg);
+        if (buf == null) {
+            return;
+        }
+
         InjectorContext context = new InjectorContext(ctx.pipeline(), buf);
         if (!isRelevant(context, PacketDirection.OUTBOUND)) {
             super.write(ctx, msg, promise);
