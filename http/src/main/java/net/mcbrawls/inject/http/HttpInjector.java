@@ -76,6 +76,10 @@ public abstract class HttpInjector extends Injector {
     }
 
     private boolean isRequestMethod(ByteBuf buf, @SuppressWarnings("SameParameterValue") String method) {
+        if (method.length() > buf.capacity()) {
+            return false;
+        }
+
         for (int i = 0; i < method.length(); i++) {
             char charAt = method.charAt(i);
             int byteAt = buf.getUnsignedByte(i);
