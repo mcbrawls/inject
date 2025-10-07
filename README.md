@@ -56,10 +56,10 @@ Hello, from Minecraft!
 Examples can be found in the `examples` module.
 
 ## Usage
-Add the andante repo to gradle:
+Add the Brawls repo to gradle:
 ```kt
 repositories {
-    maven("https://maven.andante.dev/releases/")
+    maven("https://maven.mcbrawls.net/releases/")
 }
 ```
 

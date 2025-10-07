@@ -71,7 +71,7 @@ publishing {
 
             maven {
                 name = "Andante"
-                url = uri("https://maven.andante.dev/releases/")
+                url = uri("https://maven.mcbrawls.net/releases/")
 
                 credentials {
                     username = mavenUser
