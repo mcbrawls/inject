@@ -9,10 +9,11 @@ public class InjectJavalinExample extends JavaPlugin {
     private Javalin javalin;
 
     private void initJavalin() {
-        javalin = InjectJavalinFactory.create(InjectSpigot.INSTANCE);
-        javalin.get("/", (ctx -> {
-            ctx.result("Hello from Javalin!");
-        }));
+        javalin = InjectJavalinFactory.create(InjectSpigot.INSTANCE, config -> {
+            config.routes.get("/", (ctx -> {
+                ctx.result("Hello from Javalin!");
+            }));
+        });
         javalin.start();
     }
 

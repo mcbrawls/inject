@@ -61,12 +61,12 @@ publishing {
 
     repositories {
         runCatching { // getenv throws if variable doesn't exist
-            val mavenUser = System.getenv("MAVEN_USERNAME_ANDANTE")
-            val mavenPass = System.getenv("MAVEN_PASSWORD_ANDANTE")
+            val mavenUser = providers.gradleProperty("MAVEN_USERNAME").get()
+            val mavenPass = providers.gradleProperty("MAVEN_PASSWORD").get()
 
             maven {
-                name = "Andante"
-                url = uri("https://maven.mcbrawls.net/releases/")
+                name = "Paulem"
+                url = uri("https://maven.paulem.net/releases/")
 
                 credentials {
                     username = mavenUser
