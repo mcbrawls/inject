@@ -50,8 +50,8 @@ public final class InjectJavalinFactory {
      */
     public static Javalin create(InjectPlatform platform, Consumer<JavalinConfig> config) {
         return Javalin.create(javalinConfig -> {
-            javalinConfig.useVirtualThreads = true;
-            javalinConfig.showJavalinBanner = false;
+            javalinConfig.concurrency.useVirtualThreads = true;
+            javalinConfig.startup.showJavalinBanner = false;
             javalinConfig.jetty.addConnector((server, httpConfig) -> {
                 LocalConnector connector = new LocalConnector(server, new HttpConnectionFactory(httpConfig));
                 platform.registerInjector(new JettyInjector(connector));

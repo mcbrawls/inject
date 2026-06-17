@@ -14,6 +14,11 @@ base {
     archivesName.set("${rootProject.name}-${project.name}")
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
 
 fun prop(name: String) = project.rootProject.property(name) as String
