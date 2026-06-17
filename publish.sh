@@ -41,7 +41,7 @@ publish_version() {
   fi
 
   changelog=$(echo "$notes" | sed 's/"/\\"/g')
-  game_versions='["1.21.1", "1.21.2", "1.21.3", "1.21.4"]'
+  game_versions='["1.21.*", "26.*"]'
 
   version_data=$(
     cat <<EOF

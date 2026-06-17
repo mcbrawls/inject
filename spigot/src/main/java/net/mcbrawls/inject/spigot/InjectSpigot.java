@@ -21,7 +21,7 @@ public class InjectSpigot implements InjectPlatform {
 
     private boolean isRunningPaper() {
         try {
-            Class.forName("com.destroystokyo.paper.PaperConfig");
+            Class.forName("io.papermc.paper.network.ChannelInitializeListenerHolder");
             return true;
         } catch (ClassNotFoundException e) {
             return false;

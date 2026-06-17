@@ -6,7 +6,7 @@
 	"description": "A library for making injecting into Netty easier!",
 	"authors": [
 		"radstevee",
-		"andantet"
+		"dvitski"
 	],
 	"contact": {
 		"sources": "https://github.com/mcbrawls/inject"
@@ -22,7 +22,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.7",
-		"minecraft": "~1.21.1",
+		"minecraft": ">=1.21.1",
 		"java": ">=21"
 	}
 }
